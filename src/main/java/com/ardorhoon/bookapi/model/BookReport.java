@@ -4,25 +4,26 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Data
 @Entity
-@Table(name = "Book")
-public class Book {
+@Table(name = "BookReport")
+public class BookReport {
     @Id
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="title", nullable = false, length = 100)
-    private String title;
+    @ManyToOne
+    @JoinColumn(name = "book")
+    private Book book;
 
-    @Column(name="author", nullable = false, length = 50)
-    private String author;
+    @Column(name = "content")
+    private String content;
 
-    @OneToMany(mappedBy = "book", cascade = CascadeType.REMOVE)
-    private List<BookReport> bookReportList;
+    @ManyToOne
+    @JoinColumn(name = "user")
+    private User user;
 
     @Column(name="createDate", nullable = false)
     private LocalDateTime createDate;
