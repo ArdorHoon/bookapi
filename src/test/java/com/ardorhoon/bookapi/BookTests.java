@@ -15,6 +15,20 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 @SpringBootTest
 public class BookTests {
 
+    @Autowired
+    private BookService bookService;
 
+    @ParameterizedTest
+    @MethodSource("bookInfoResult")
+    void createTest(String title, String author) {
+        assertThatCode(() -> bookService.create(title, author)).doesNotThrowAnyException();
+    }
+
+    private static Stream<Arguments> bookInfoResult() {
+        return Stream.of(
+                arguments("보스", "최익현"),
+                arguments("나무", "베르나르 베르베르")
+        );
+    }
 
 }
