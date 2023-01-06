@@ -26,7 +26,7 @@ public class BookTests {
 
     private static Stream<Arguments> bookInfoResult() {
         return Stream.of(
-                arguments("보스", "최익현"),
+                arguments("워런 버핏의 주주 서한", "워런 버핏"),
                 arguments("나무", "베르나르 베르베르")
         );
     }
