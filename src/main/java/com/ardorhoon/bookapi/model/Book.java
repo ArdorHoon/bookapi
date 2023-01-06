@@ -1,6 +1,7 @@
 package com.ardorhoon.bookapi.model;
 
 import lombok.Data;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -11,9 +12,10 @@ import java.util.List;
 @Table(name = "Book")
 public class Book {
     @Id
-    @Column(name = "id", nullable = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    @Column(name = "id")
+    private String id;
 
     @Column(name="title", nullable = false, length = 100)
     private String title;

@@ -1,6 +1,7 @@
 package com.ardorhoon.bookapi.model;
 
 import lombok.Data;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -9,10 +10,12 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "BookReport")
 public class BookReport {
+
     @Id
-    @Column(name = "id", nullable = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    @Column(name = "id")
+    private String id;
 
     @ManyToOne
     @JoinColumn(name = "book")
