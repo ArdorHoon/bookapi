@@ -1,9 +1,9 @@
 package com.ardorhoon.bookapi.service;
 
-import com.ardorhoon.bookapi.model.Book;
+import java.util.Map;
 
 public interface BookService {
 
      void create(String title, String author);
-
+     Map<String, Object> getBook();
 }
