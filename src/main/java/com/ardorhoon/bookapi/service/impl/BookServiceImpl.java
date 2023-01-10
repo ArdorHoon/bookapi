@@ -35,7 +35,7 @@ public class BookServiceImpl implements BookService {
     public Map<String, Object> getBook() {
         Map<String, Object> result = new HashMap<>();
         List<Book> bookList = bookRepository.findAll();
-        
+
         result.put("books", bookList);
         return result;
     }

@@ -1,5 +1,6 @@
 package com.ardorhoon.bookapi.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -28,8 +29,10 @@ public class BookReport {
     private User user;
 
     @Column(name="createDate", nullable = false)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss.S")
     private LocalDateTime createDate;
 
     @Column(name="modifyDate")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss.S")
     private LocalDateTime modifyDate;
 }
