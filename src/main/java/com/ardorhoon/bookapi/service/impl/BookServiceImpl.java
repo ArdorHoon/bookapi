@@ -11,7 +11,6 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -20,14 +19,18 @@ public class BookServiceImpl implements BookService {
     private final BookRepository bookRepository;
 
     @Override
-    public void create(String title, String author) {
+    @Transactional
+    public void create(String title, List<String> author, String img, String isbn) {
+
         Book book = new Book();
 
         book.setCreateDate(LocalDateTime.now());
         book.setAuthor(author);
         book.setTitle(title);
-
+        book.setImage(img);
+        book.setIsbn(isbn);
         bookRepository.save(book);
+
     }
 
     @Override
@@ -38,5 +41,10 @@ public class BookServiceImpl implements BookService {
 
         result.put("books", bookList);
         return result;
+    }
+
+    @Override
+    public Book getBookByIsbn(String isbn) {
+        return bookRepository.findBookByIsbn(isbn);
     }
 }

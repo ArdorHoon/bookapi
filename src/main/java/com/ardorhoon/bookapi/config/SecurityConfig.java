@@ -11,15 +11,9 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.header.writers.frameoptions.XFrameOptionsHeaderWriter;
 
 
-@Configuration // 스프링의 환경설정 파일임을 의미하는 애너테이션
-@EnableWebSecurity //내부적으로 SpringSecurityFilterChain이 동작하여 필터가 적용된다.
+@Configuration
+@EnableWebSecurity
 public class SecurityConfig{
-
-    //AuthenticationManager는 스프링 시큐리티의 인증을 담당, 생성 시 스프링의 내부 동작으로 인해 위에서 작성한 UserSecurityService와 PasswordEncoder가 자동으로 설정
-    @Bean
-    AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
-        return authenticationConfiguration.getAuthenticationManager();
-    }
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
@@ -29,6 +23,7 @@ public class SecurityConfig{
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         //모든 인증되지 않은 요청을 허락한다
+        httpSecurity.csrf().disable();
         httpSecurity.authorizeRequests().antMatchers("/**").permitAll()
                 .and()
                 .headers()

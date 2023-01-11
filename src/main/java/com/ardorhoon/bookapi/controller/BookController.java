@@ -1,11 +1,11 @@
 package com.ardorhoon.bookapi.controller;
 
+import com.ardorhoon.bookapi.model.Book;
 import com.ardorhoon.bookapi.service.BookService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -18,6 +18,18 @@ public class BookController {
     @GetMapping("/list")
     public Map<String, Object> getBook() {
         return bookService.getBook();
+    }
+
+
+    @PostMapping("/create")
+    public Book create(
+            @RequestParam(value = "title") String title,
+            @RequestParam(value = "author") List<String> author,
+            @RequestParam(value = "image", required = false) String image,
+            @RequestParam(value = "isbn") String isbn
+    ) {
+        bookService.create(title, author, image, isbn);
+        return bookService.getBookByIsbn(isbn);
     }
 
 }
