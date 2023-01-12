@@ -3,7 +3,9 @@ package com.ardorhoon.bookapi.repository;
 import com.ardorhoon.bookapi.model.Book;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.Optional;
+
 public interface BookRepository extends JpaRepository<Book, Long> {
 
-    Book findBookByIsbn(String isbn);
+    Optional<Book> findBookByIsbn(String isbn);
 }

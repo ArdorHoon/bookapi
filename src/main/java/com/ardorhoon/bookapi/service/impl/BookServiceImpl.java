@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -45,6 +46,11 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Book getBookByIsbn(String isbn) {
-        return bookRepository.findBookByIsbn(isbn);
+        Optional<Book> book = bookRepository.findBookByIsbn(isbn);
+
+        if (book.isPresent()) {
+            return book.get();
+        } else
+            throw new RuntimeException();
     }
 }

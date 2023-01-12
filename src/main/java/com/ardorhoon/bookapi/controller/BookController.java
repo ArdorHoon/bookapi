@@ -32,4 +32,11 @@ public class BookController {
         return bookService.getBookByIsbn(isbn);
     }
 
+    @GetMapping("")
+    public Book getBookByIsbn(
+            @RequestParam(value = "isbn") String isbn
+    ) {
+        return bookService.getBookByIsbn(isbn);
+    }
+
 }
