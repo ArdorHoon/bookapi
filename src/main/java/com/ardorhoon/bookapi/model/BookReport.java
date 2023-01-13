@@ -24,6 +24,9 @@ public class BookReport {
     @Column(name = "content")
     private String content;
 
+    @Column(name = "rating")
+    private int rating;
+
     @ManyToOne
     @JoinColumn(name = "user")
     private User user;
