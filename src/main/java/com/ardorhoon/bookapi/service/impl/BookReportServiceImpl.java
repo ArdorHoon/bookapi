@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -28,5 +29,27 @@ public class BookReportServiceImpl implements BookReportService {
 
         bookReportRepository.save(bookReport);
         return bookReport;
+    }
+
+    @Override
+    public BookReport modify(Long id, String content, int rating) {
+        Optional<BookReport> bookReport = bookReportRepository.findById(id);
+
+        if (bookReport.isPresent()) {
+            BookReport revisionReport = bookReport.get();
+            revisionReport.setRating(rating);
+            revisionReport.setContent(content);
+            return revisionReport;
+        } else
+            throw new RuntimeException();
+    }
+
+    @Override
+    public void delete(Long id) {
+        Optional<BookReport> bookReport = bookReportRepository.findById(id);
+        if (bookReport.isPresent()) {
+            bookReportRepository.delete(bookReport.get());
+        } else
+            throw new RuntimeException();
     }
 }

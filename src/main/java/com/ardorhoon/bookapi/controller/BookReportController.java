@@ -16,7 +16,7 @@ public class BookReportController {
     private final BookReportService bookReportService;
 
     @PostMapping("/create")
-    public BookReport createUser(@RequestBody User user,
+    public BookReport createBookReport(@RequestBody User user,
                                  @RequestBody Book book,
                                  @RequestParam String content,
                                  @RequestParam int rating
@@ -24,4 +24,16 @@ public class BookReportController {
         return bookReportService.create(book, user, content, rating);
     }
 
+    @PostMapping("/modify/{id}")
+    public BookReport modifyBookReport(@PathVariable("id") Long id,
+                                 @RequestParam String content,
+                                 @RequestParam int rating
+    ) {
+        return bookReportService.modify(id, content, rating);
+    }
+
+    @PostMapping("/delete/{id}")
+    public void deleteBookReport(@PathVariable("id") Long id) {
+        bookReportService.delete(id);
+    }
 }
