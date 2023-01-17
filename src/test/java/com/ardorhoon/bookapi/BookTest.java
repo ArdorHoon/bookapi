@@ -14,7 +14,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatCode;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 @SpringBootTest
-public class BookTests {
+public class BookTest {
 
     @Autowired
     private BookService bookService;
