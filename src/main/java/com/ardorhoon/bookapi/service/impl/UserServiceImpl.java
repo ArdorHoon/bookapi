@@ -8,6 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 
 @Service
@@ -31,5 +32,16 @@ public class UserServiceImpl implements UserService {
         this.userRepository.save(user);
 
         return user;
+    }
+
+    @Override
+    public User getUserById(Long id) {
+        Optional<User> user = userRepository.findById(id);
+
+        if(user.isPresent()){
+            return user.get();
+        }else{
+            throw new RuntimeException();
+        }
     }
 }
