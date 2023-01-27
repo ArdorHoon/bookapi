@@ -1,6 +1,7 @@
 package com.ardorhoon.bookapi.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -18,6 +19,7 @@ public class BookReport {
     private Long id;
 
     @ManyToOne
+    @JsonManagedReference // 순환참조 방지
     @JoinColumn(name = "book")
     private Book book;
 
@@ -28,6 +30,7 @@ public class BookReport {
     private int rating;
 
     @ManyToOne
+    @JsonManagedReference // 순환참조 방지
     @JoinColumn(name = "user")
     private User user;
 

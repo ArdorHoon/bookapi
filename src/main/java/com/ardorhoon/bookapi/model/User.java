@@ -1,5 +1,6 @@
 package com.ardorhoon.bookapi.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
@@ -31,6 +32,7 @@ public class User {
     private String password;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    @JsonBackReference //순환참조 방지
     private List<BookReport> bookReportList;
 
     @Column(name = "createDate", nullable = false)

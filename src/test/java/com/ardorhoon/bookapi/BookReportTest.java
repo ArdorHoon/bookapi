@@ -32,5 +32,4 @@ public class BookReportTest {
         assertThatCode(() -> bookReportService.create(book, user, "독후감 내용", 4)).doesNotThrowAnyException();
     }
 
-
 }
